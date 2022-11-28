@@ -5,14 +5,15 @@ using namespace std;
 #include <string>
 #include <vector>
 #include "Miembro.h"
-#include "Materia.h"
+#include "Grupo.h"
+#include "utils.h"
 
 class Alumno : public Miembro {
 
     private:
         int beca;
         vector<int> calificaciones;
-        vector<Materia> materias;
+        vector<Grupo> grupos;
     
     public:
         // Constructores
@@ -33,8 +34,8 @@ class Alumno : public Miembro {
             return calificaciones;
         }
 
-        vector<Materia> getMaterias() {
-            return materias;
+        vector<Grupo> getGrupos() {
+            return grupos;
         }
 
         //Setters
@@ -47,8 +48,35 @@ class Alumno : public Miembro {
             calificaciones.push_back(cal);
         }
 
-        void agregarMateria(Materia materia) {
-            materias.push_back(materia);
+        void agregarGrupo(Grupo grupo) {
+            grupos.push_back(grupo);
+        }
+
+        /*
+        Override del método virtual previamente declarado en la clase Miembro. Es 
+        posible extender la funcionalidad del método padre en lugar de sobreescribirlo
+        por completo.
+        */
+        void imprimeDatos() {
+
+            string cals = vectorToString(calificaciones);
+
+            cout << "-------- ALUMNO --------" << endl;
+            
+            //Llamar la lógica del método padres
+            Miembro::imprimeDatos();
+
+            //Añadir lógica local
+            cout << "Calificaciones: ";
+
+            if(cals == ""){
+                cout << "N/D";
+            }
+            else{
+                cout << cals;
+            }
+
+            cout << endl;
         }
 
 };

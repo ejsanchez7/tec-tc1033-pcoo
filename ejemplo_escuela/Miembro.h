@@ -6,7 +6,7 @@ using namespace std;
 
 class Miembro {
 
-    private:
+    protected:
         string id;
         string nombre;
         int edad;
@@ -61,7 +61,15 @@ class Miembro {
         void setGenero(string gen) {
             genero = gen;
         }
-
+        /*
+        Método virtual. Los métodos virtuales indican que este método puede ser sobreescrito
+        en las clases hijas. Puede contar con cierta lógica default que se ejecutará en caso 
+        de que el método no sea implementado en las clases hijas.
+        */
+        virtual void imprimeDatos() {
+            cout << "ID: " << id <<endl;
+            cout << "Nombre: " << nombre << endl;
+        };
 
 };
 

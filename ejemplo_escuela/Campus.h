@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include "Miembro.h"
+#include "Alumno.h"
+#include <typeinfo>
 
 using namespace std;
 
@@ -13,7 +15,13 @@ class Campus {
     private:
         string nombre;
         string ubicacion;
-        vector<Miembro> integrantes;
+        /*
+        Para que el uso de métodos virtuales funcione y se pueda
+        interpretar a un "Miembro" como cualquiera de sus clases
+        hijas, se debe usar como "apuntador" a Miembro, por eso
+        el *
+        */
+        vector<Miembro*> integrantes;
 
     public:
         //Constructores
@@ -36,7 +44,7 @@ class Campus {
             return ubicacion;
         }
 
-        vector<Miembro> getIntegrantes() {
+        vector<Miembro*> getIntegrantes() {
             return integrantes;
         }
 
@@ -50,14 +58,20 @@ class Campus {
         }
 
         // Metodos
-        void agregarIntegrante(Miembro integrante) {
+        // Recibe un apuntador a un objeto de clase "Miembro" (incluyendo sus hijos)
+        void agregarIntegrante(Miembro* integrante) {
             integrantes.push_back(integrante);
         }
 
         void mostrarIntegrantes() {
 
             for(int i = 0; i < integrantes.size(); i++) {
-                cout << integrantes[i].getId() << "\t" << integrantes[i].getNombre() << endl;
+                /*
+                Cuando trabajamos con apuntadores, los atributos y métodos del objeto
+                se obtienen con el operador "->" en lugar de "."
+                */
+                integrantes[i]->imprimeDatos();
+                cout << endl;
             }
 
         }
